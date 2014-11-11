@@ -1,1 +1,52 @@
 Starting documentation on graphite on CentOS howto
+
+What you will get with graphite will be
+* Place to store numeric time-series data
+* Software to render graphs of the data collected
+
+Process will be
+
+1. Install graphite and use MySQL for backend
+2. Install carbon and whisper
+3. Install bucky
+4. Install collectd
+
+
+1. Install graphite and use MySQL for backend
+
+- Install packages
+* yum install graphite-web mysql mysql-server mysql-python
+
+- Start and configure MySQL
+* /etc/init.c/mysqld start
+* mysql_secure_installation (follow prompts)
+
+# Create DB to be used by graphite, username and password
+mysql -e "create database graphite;" -u root -p
+mysql -e "grant all privileges on graphite.* to 'graphite'@'localhost' identified by 'my_super_extra_password';" -u root -p
+mysql -e "flush privileges;" -u root -p
+
+- Confiure graphite to use the graphite DB created on MySQL
+* vim /etc/graphite-web/local_settings.py
+
+DATABASES = {
+    'default': {
+        'NAME': 'graphite',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'graphite',
+        'PASSWORD': 'my_super_extra_password',
+    }
+}
+
+- Populate the graphite DB with the graphite script
+* /usr/lib/python2.6/site-packages/graphite/manage.py syncdb
+
+- Start apache and point your browser to your grpahite server ip
+* /etc/init.d/httpd start
+
+
+These are all the steps required to install and configure graphite
+
+2. install carbon and whisper
+
+* yum install python-carbon python-whisper

@@ -50,3 +50,21 @@ These are all the steps required to install and configure graphite
 2. install carbon and whisper
 
 * yum install python-carbon python-whisper
+
+- start the carbon cache service
+* /etc/init.d/carbon-cache start
+
+- Configure a simple storage-schema.conf 
+* vim /etc/carbon/storage-schemas.conf
+
+add this
+
+[server_load]
+priority = 100
+pattern = ^servers\.
+retentions = 10:43200,900:350400
+
+
+3. Install bucky
+
+* yum install python-bucky

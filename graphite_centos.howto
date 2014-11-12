@@ -41,6 +41,10 @@ DATABASES = {
 - Populate the graphite DB with the graphite script
 * /usr/lib/python2.6/site-packages/graphite/manage.py syncdb
 
+When this steps occurs, you will be prompted to create a superuser. This superuser will be the one used to login to the graphite web interface and save custom graphs, create more users and some other admin tasks. Please save the credentials for the user created.
+
+
+
 - Start apache and point your browser to your grpahite server ip
 * /etc/init.d/httpd start
 

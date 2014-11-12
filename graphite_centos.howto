@@ -15,7 +15,7 @@ Process will be
 1. Install graphite and use MySQL for backend
 
 - Install packages
-* yum install graphite-web mysql mysql-server mysql-python
+* yum install graphite-web mysql mysql-server MySQL-python
 
 - Start and configure MySQL
 * /etc/init.c/mysqld start
